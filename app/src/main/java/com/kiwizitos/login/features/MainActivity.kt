@@ -23,18 +23,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (currentUser != null ) {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
         val emailField = binding.edtLoginEmail
         val passwordField = binding.edtLoginPassword
         val btnGotoRegister = binding.txtRegister
         val btnLogin = binding.btnSubmitLogin
-        val txtUser = binding.txtUser
 
         btnGotoRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
-
-        txtUser.text = currentUser?.email ?: "Usuário"
 
         btnLogin.setOnClickListener {
             Validator().validateLogin(emailField, passwordField)

@@ -1,6 +1,7 @@
 package com.kiwizitos.login.features
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -22,18 +23,20 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (currentUser != null) {
+            startActivity(Intent(this, HomeActivity::class.java))
+        }
+
         val emailField = binding.edtRegisterEmail
         val passwordField = binding.edtRegisterPassword
         val confirmPasswordField = binding.edtPasswordConfirm
         val btnGotoLogin = binding.txtLogin
         val btnRegister = binding.btnSubmitRegister
-        val txtUser = binding.txtUser
+
 
         btnGotoLogin.setOnClickListener {
             finish()
         }
-
-        txtUser.text = currentUser?.email ?: "Usuário"
 
         btnRegister.setOnClickListener {
             Validator().validateRegister(emailField, passwordField, confirmPasswordField)
